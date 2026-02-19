@@ -16,9 +16,11 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 class AuthenticatorApplicationTest {
 
+    // defining dependencies to inject
     @Mock
     AuthenticatorInterface authenticatorMock;
 
+    // defining where to inject the dependencies
     @InjectMocks
     AuthenticatorApplication authenticator;
 
@@ -41,10 +43,7 @@ class AuthenticatorApplicationTest {
 
         String username = "java";
         String password = "user";
-        //mocking object
-        authenticatorMock = Mockito.mock(AuthenticatorInterface.class);
-        authenticator = new AuthenticatorApplication(authenticatorMock);
-        // defining behaviour what to do when
+
         when(authenticatorMock.authenticateUser(username,password)).thenReturn(false);
 
         boolean actual = authenticator.authenticate(username,password);
