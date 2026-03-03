@@ -1,6 +1,5 @@
 package org.example.model;
 
-
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
@@ -8,9 +7,7 @@ import static org.mockito.Mockito.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class SpyExampleTest {
-
 
     @Test
     public void spyExampleTest() {
@@ -25,7 +22,6 @@ public class SpyExampleTest {
         when(hashMapSpy.get("key")).thenReturn("Another value");
 
         System.out.println(hashMapSpy.get("key"));
-
 
     }
 }

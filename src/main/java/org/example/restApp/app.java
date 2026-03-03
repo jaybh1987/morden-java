@@ -11,7 +11,6 @@ public class app {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
-
         server.setExecutor(null); // default executor
         server.start();
 
