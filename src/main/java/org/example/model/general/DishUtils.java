@@ -1,5 +1,6 @@
 package org.example.model.general;
 
+import java.net.CookieManager;
 import java.util.*;
 import java.util.concurrent.RecursiveTask;
 import java.util.function.BinaryOperator;
@@ -15,6 +16,41 @@ public class DishUtils {
     private void test() {
 
         Map<String, List<Dish>> s = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+    }
+
+    public static void mostCaloricPartitionedByVeg() {
+
+        menu.stream().collect(
+                Collectors.partitioningBy(
+                        Dish::isVegiterian,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(
+                                        Comparator.comparingInt(Dish::getCalories)),
+                                Optional::get
+                        )
+                )
+        );
+    }
+
+    public static Map<Boolean, Map<String, List<Dish>>> getVegDishesByType() {
+
+
+       return menu.stream().collect(
+                Collectors.partitioningBy(
+                        Dish::isVegiterian,
+                        Collectors.groupingBy(Dish::getType)
+                )
+        );
+    };
+
+    public static Map<Boolean, List<Dish>> getPartitionedMenu() {
+        return menu.stream().collect(
+                Collectors.partitioningBy(Dish::isVegiterian)
+        );
+    }
+
+    public List<Dish> getVegDishes() {
+        return menu.stream().filter(Dish::isVegiterian).collect(Collectors.toList());
     }
 
     public static Map<String, HashSet<CaloricLevel>> caloricLevelsByType_two(List<Dish> list) {

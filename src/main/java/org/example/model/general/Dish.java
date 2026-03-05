@@ -24,6 +24,14 @@ public class Dish {
         return type;
     }
 
+    public boolean isVegiterian() {
+        return switch (this.type) {
+            case "Veg" -> true;
+            case "NonVeg" , "SeaFood" -> false;
+            default -> false;
+        };
+    }
+
     @Override
     public String toString() {
         return "Dish{name='" + name + "', calories=" + calories + "}";
