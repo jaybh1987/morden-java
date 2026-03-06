@@ -14,9 +14,17 @@ public class DishUtils {
             new Dish("Burger", 80, "Veg"), new Dish("Paplet", 100, "SeaFood"), new Dish("Chicken", 120, "NonVeg"));
 
     private void test() {
-
         Map<String, List<Dish>> s = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+
+        menu.stream().collect(
+                Collectors.partitioningBy(
+                        Dish::isVegiterian,
+                        Collectors.partitioningBy(dish -> dish.getCalories() > 100)
+                    )
+                );
     }
+
+
 
     public static void mostCaloricPartitionedByVeg() {
 
