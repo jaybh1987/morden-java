@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.myEnums.LesseeLeaseSortField;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.example.model.general.DishUtils.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -7,7 +12,6 @@ import static org.example.model.general.DishUtils.*;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(getVegDishesByType());
     }
 
 }

@@ -16,45 +16,24 @@ public class DishUtils {
     private void test() {
         Map<String, List<Dish>> s = menu.stream().collect(Collectors.groupingBy(Dish::getType));
 
-        menu.stream().collect(
-                Collectors.partitioningBy(
-                        Dish::isVegiterian,
-                        Collectors.partitioningBy(dish -> dish.getCalories() > 100)
-                    )
-                );
+        menu.stream().collect(Collectors.partitioningBy(Dish::isVegiterian,
+                Collectors.partitioningBy(dish -> dish.getCalories() > 100)));
     }
-
-
 
     public static void mostCaloricPartitionedByVeg() {
 
-        menu.stream().collect(
-                Collectors.partitioningBy(
-                        Dish::isVegiterian,
-                        Collectors.collectingAndThen(
-                                Collectors.maxBy(
-                                        Comparator.comparingInt(Dish::getCalories)),
-                                Optional::get
-                        )
-                )
-        );
+        menu.stream().collect(Collectors.partitioningBy(Dish::isVegiterian, Collectors
+                .collectingAndThen(Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)), Optional::get)));
     }
 
     public static Map<Boolean, Map<String, List<Dish>>> getVegDishesByType() {
 
-
-       return menu.stream().collect(
-                Collectors.partitioningBy(
-                        Dish::isVegiterian,
-                        Collectors.groupingBy(Dish::getType)
-                )
-        );
+        return menu.stream()
+                .collect(Collectors.partitioningBy(Dish::isVegiterian, Collectors.groupingBy(Dish::getType)));
     };
 
     public static Map<Boolean, List<Dish>> getPartitionedMenu() {
-        return menu.stream().collect(
-                Collectors.partitioningBy(Dish::isVegiterian)
-        );
+        return menu.stream().collect(Collectors.partitioningBy(Dish::isVegiterian));
     }
 
     public List<Dish> getVegDishes() {

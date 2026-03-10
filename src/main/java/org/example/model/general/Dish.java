@@ -1,5 +1,8 @@
 package org.example.model.general;
 
+import java.util.List;
+import java.util.function.Function;
+
 public class Dish {
 
     private String name;
@@ -27,7 +30,7 @@ public class Dish {
     public boolean isVegiterian() {
         return switch (this.type) {
             case "Veg" -> true;
-            case "NonVeg" , "SeaFood" -> false;
+            case "NonVeg", "SeaFood" -> false;
             default -> false;
         };
     }

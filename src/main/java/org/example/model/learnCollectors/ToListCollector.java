@@ -9,8 +9,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-
-
 // items in the stream, accumulator, result
 // A class that gathers all the elements of a Stream<T> into a List<T>.
 // Clarifying that objected used for the accumulation process will also be the final result of the collection process.
