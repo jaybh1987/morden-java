@@ -37,3 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 run-postgres/docker-compose.yaml
+/src/main/java/org/example/LeaseDetailsControllerQueries/

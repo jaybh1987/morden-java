@@ -1,4 +1,4 @@
-package org.example.model.learnCollectors;
+package org.example.model.book.learnCollectors;
 
 import java.util.Set;
 import java.util.function.BiConsumer;

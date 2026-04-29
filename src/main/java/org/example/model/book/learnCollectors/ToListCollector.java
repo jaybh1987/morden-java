@@ -1,4 +1,4 @@
-package org.example.model.learnCollectors;
+package org.example.model.book.learnCollectors;
 
 import java.util.ArrayList;
 import java.util.List;
