@@ -7,6 +7,7 @@ import org.example.enumsdemo.Permissions;
 import org.example.model.book.BookDetails;
 import org.example.model.book.Countries;
 import org.example.model.book.Mybook;
+import org.example.model.employee.Employee;
 import org.jooq.impl.QOM;
 
 import java.util.List;
@@ -21,22 +22,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Mybook> list = List.of(
-                new Mybook("Book1", 100L, List.of(Countries.USA, Countries.CANADA)),
-                new Mybook("Book2", 150L, List.of(Countries.INDIA)),
-                new Mybook("Book3", 200L, List.of(Countries.INDIA))
+        List<Employee> list = List.of(
+                new Employee(1, "John Doe", "IT", 50000, true, 30),
+                new Employee(2, "Jane Smith", "HR", 45000, false, 28),
+                new Employee(3, "Alice Johnson", "IT", 55000, true, 35),
+                new Employee(4, "Bob Brown", "Finance", 60000, false, 40),
+                new Employee(5, "Charlie Davis", "IT", 52000, true, 32),
+                new Employee(6, "Eve Wilson", "HR", 48000, false, 29)
         );
 
-        //get the sum of all books.
-        Long sum = list.stream().mapToLong(Mybook::getBookPrice).sum();
-        System.out.println("Sum of all books: " + sum);
+        Map<Boolean, List<Employee>> result = list.stream()
+                .collect(Collectors.partitioningBy(Employee::isActive));
 
-        //Group by countries and count the number of books published in each country.
-        Map<Countries, Long> groupByCountry = list.stream()
-                .flatMap(book -> book.getPublishedCountries().stream())
-                .collect(Collectors.groupingBy(country -> country, Collectors.counting()));
-        System.out.println("Books published in each country: " + groupByCountry);
+        Map<Boolean, List<Employee>> partitionedBySalary = list
+                .stream()
+                .collect(Collectors.partitioningBy(emp -> emp.getSalary() > 50000));
 
+        Map<Boolean, Long> countEmployeesInPartition = list
+                .stream()
+                .collect(Collectors.partitioningBy(
+                        e -> e.getSalary() > 50000,
+                        Collectors.counting()
+                ));
+
+        Map<Boolean, List<String>> namesOfActiveAndInActive = list
+                .stream()
+                .collect(Collectors.partitioningBy(
+                        Employee::isActive,
+                        Collectors.mapping(Employee::getName, Collectors.toList())
+                ));
+
+        System.out.println(namesOfActiveAndInActive);
     }
 
 }
